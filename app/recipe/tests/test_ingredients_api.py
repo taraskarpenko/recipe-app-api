@@ -136,7 +136,7 @@ class PrivateIngredientsTest(TestCase):
 
         ingredient1 = Ingredient.objects.create(user=self.user, name='apple')
         ingredient2 = Ingredient.objects.create(user=self.user, name='rice')
-        ingredient3 = Ingredient.objects.create(user=self.user, name='butter')
+        Ingredient.objects.create(user=self.user, name='butter')
 
         recipe1.ingredients.add(ingredient1)
         recipe2.ingredients.add(ingredient1)

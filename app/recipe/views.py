@@ -53,7 +53,8 @@ class RecipeViewSet(viewsets.ModelViewSet):
         if ingredients:
             ingredients_ids = self._params_to_ints(ingredients)
             queryset = queryset.filter(ingredients__id__in=ingredients_ids)
-        return queryset.filter(user=self.request.user).order_by('-id').distinct()
+        queryset = queryset.filter(user=self.request.user)
+        return queryset.order_by('-id').distinct()
 
     def get_serializer_class(self):
         if self.action == 'list':
@@ -75,12 +76,13 @@ class RecipeViewSet(viewsets.ModelViewSet):
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 @extend_schema_view(
     list=extend_schema(
         parameters=[
             OpenApiParameter(
                 'assigned_only',
-                OpenApiTypes.INT, enum=[0,1],
+                OpenApiTypes.INT, enum=[0, 1],
                 description='Filter items assigned to recipe'
             )
         ]

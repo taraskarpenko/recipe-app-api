@@ -134,7 +134,7 @@ class PrivateTagsTest(TestCase):
 
         tag1 = Tag.objects.create(user=self.user, name='apple')
         tag2 = Tag.objects.create(user=self.user, name='rice')
-        tag3 = Tag.objects.create(user=self.user, name='butter')
+        Tag.objects.create(user=self.user, name='butter')
 
         recipe1.tags.add(tag1)
         recipe2.tags.add(tag1)
